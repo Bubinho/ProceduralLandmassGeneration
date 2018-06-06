@@ -9,7 +9,7 @@ public class MapGenerator : MonoBehaviour {
 	public enum DrawMode {NoiseMap, ColorMap, Mesh, FalloffMap};
 	public DrawMode drawMode;
 	public Noise.NormalizeMode normalizeMode;
-	public static int mapChunkSize = 241;
+	public static int mapChunkSize = 239;
 	[Range(0,6)]
 	public int editorPreviewLOD;
 	public float scale;
@@ -100,7 +100,7 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	MapData GenerateMapData(Vector2 center){
-		float[,] noiseMap = Noise.GenerateNoiseMap (mapChunkSize, mapChunkSize, seed, scale, octaves, persistance, lacunarity, center + offset, normalizeMode);
+		float[,] noiseMap = Noise.GenerateNoiseMap (mapChunkSize + 2, mapChunkSize + 2, seed, scale, octaves, persistance, lacunarity, center + offset, normalizeMode);
 
 		//map colors to heightvalues
 		Color[] colors = new Color[mapChunkSize * mapChunkSize];
@@ -144,7 +144,7 @@ public class MapGenerator : MonoBehaviour {
 			this.callback = callback;
 			this.parameter = parameter;
 		}
-		
+
 	}
 }
 
@@ -165,4 +165,3 @@ public struct MapData{
 		this.colorMap = colorMap;
 	}
 }
-	
